@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AareonTechnicalTest.Models
 {
-    public class Ticket : IEntity
+    public class Note : IEntity
     {
         [Key]
         public int Id { get; }
@@ -12,6 +11,6 @@ namespace AareonTechnicalTest.Models
 
         public int PersonId { get; set; }
 
-        public List<Note> Notes { get; set; }
+        public int TicketId { get; set; }
     }
 }

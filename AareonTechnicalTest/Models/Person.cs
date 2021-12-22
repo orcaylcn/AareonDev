@@ -2,7 +2,7 @@
 
 namespace AareonTechnicalTest.Models
 {
-    public class Person
+    public class Person : IEntity
     {
         [Key]
         public int Id { get; }

@@ -1,3 +1,5 @@
+using AareonTechnicalTest.Repositories;
+using AareonTechnicalTest.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +25,12 @@ namespace AareonTechnicalTest
 
             services.AddControllers();
             services.AddDbContext<ApplicationContext>(c => c.UseSqlite());
+            services.AddScoped<IPersonRepository, PersonRepository>()
+                .AddScoped<ITicketRepository, TicketRepository>()
+                .AddScoped<INoteRepository, NoteRepository>()
+                .AddScoped<IPersonService, PersonService>()
+                .AddScoped<ITicketService, TicketService>()
+                .AddScoped<INoteService, NoteService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AareonTechnicalTest", Version = "v1" });
@@ -47,6 +55,11 @@ namespace AareonTechnicalTest
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    "Default",
+                    "api/{controller}/{action}/{id?}"
+                );
+
                 endpoints.MapControllers();
             });
         }
